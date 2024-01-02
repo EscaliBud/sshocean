@@ -14,12 +14,7 @@ from .start import start
 
 
 def add_account(d: Union[Message, CallbackQuery]):
-    t = '<b>Tambahkan Akun DO</b>\n\n' \
-        'Masukan Token Digital Ocean <a href="https://cloud.digitalocean.com/account/api/tokens">Ambil Disini</a> perhatikan dalam copy paste\n\n' \
-        'Contoh:\n' \
-        '<code>token123:Komentarxxx</code>\n' \
-        '<code>token345</code>\n\n' \
-        '/cancel Membatalkan'
+    t = '<b>Add DO Account</b>\n\n' \ 'Input Digital Ocean Token <a href="https://cloud.digitalocean.com/account/api/tokens">Grab Here</a> note in copy paste\n\n' \ 'Example:\n' \ '<code>token123:Commentxxx</code>\n' \ '<code>token345</code>\n\n' \ '/cancel Cancel'
 
     msg = bot.send_message(
         text=t,
