@@ -14,14 +14,14 @@ from utils.localizer import localize_region
 def droplet_detail(call: CallbackQuery, data: dict):
     doc_id = data['doc_id'][0]
     droplet_id = data['droplet_id'][0]
-    t = '<b>Informasi server</b>\n\n'
+    t = '<b>Server Information</b>\n\n'
 
     account = AccountsDB().get(doc_id=doc_id)
 
     bot.edit_message_text(
         text=f'{t}'
-             f'akun: <code>{account["email"]}</code>\n\n'
-             'Dapatkan informasi instan...',
+             f'Account: <code>{account["email"]}</code>\n\n'
+             'Get instant Information...',
         chat_id=call.from_user.id,
         message_id=call.message.message_id,
         parse_mode='HTML'
@@ -36,7 +36,7 @@ def droplet_detail(call: CallbackQuery, data: dict):
     markup.row(
 
         InlineKeyboardButton(
-            text='menghapus',
+            text='Delete',
             callback_data=f'droplet_actions?doc_id={doc_id}&droplet_id={droplet_id}&a=delete'
         ),
     )
@@ -44,45 +44,45 @@ def droplet_detail(call: CallbackQuery, data: dict):
     if droplet.status == 'active':
         power_buttons.extend([
             InlineKeyboardButton(
-                text='Matikan',
+                text='ShutDown',
                 callback_data=f'droplet_actions?doc_id={doc_id}&droplet_id={droplet_id}&a=shutdown'
             ),
             InlineKeyboardButton(
-                text='Mengulang kembali',
+                text='Reboot Droplet',
                 callback_data=f'droplet_actions?doc_id={doc_id}&droplet_id={droplet_id}&a=reboot'
             )
         ])
     else:
         power_buttons.append(
             InlineKeyboardButton(
-                text='Awal',
+                text='Power On',
                 callback_data=f'droplet_actions?doc_id={doc_id}&droplet_id={droplet_id}&a=power_on'
             )
         )
     markup.row(*power_buttons)
     markup.row(
         InlineKeyboardButton(
-            text='Menyegarkan',
+            text='Refresh',
             callback_data=f'droplet_detail?doc_id={account.doc_id}&droplet_id={droplet_id}'
         ),
         InlineKeyboardButton(
-            text='kembali',
+            text='Return',
             callback_data=f'list_droplets?doc_id={account.doc_id}'
         )
     )
 
     bot.edit_message_text(
         text=f'{t}'
-             f'Akun: <code>{account["email"]}</code>\n'
-             f'Nama: <code>{droplet.name}</code>\n'
+             f'Account : <code>{account["email"]}</code>\n'
+             f'Name : <code>{droplet.name}</code>\n'
              f'Model: <code>{droplet.size_slug}</code>\n'
-             f'Negara: <code>{localize_region(droplet.region["slug"])}</code>\n'
+             f'Location: <code>{localize_region(droplet.region["slug"])}</code>\n'
              f'Os sys: <code>{droplet.image["distribution"]} {droplet.image["name"]}</code>\n'
              f'Hard disk: <code>{droplet.disk} GB</code>\n'
              f'Server IP: <code>{droplet.ip_address}</code>\n'
              f'Private IP： <code>{droplet.private_ip_address}</code>\n'
              f'Status: <code>{droplet.status}</code>\n'
-             f'Pembuatan: <code>{droplet.created_at.split("T")[0]}</code>\n',
+             f'Making: <code>{droplet.created_at.split("T")[0]}</code>\n',
         chat_id=call.from_user.id,
         message_id=call.message.message_id,
         parse_mode='HTML',
