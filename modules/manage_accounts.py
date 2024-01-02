@@ -12,16 +12,16 @@ from utils.db import AccountsDB
 
 
 def manage_accounts(d: Union[Message, CallbackQuery]):
-    t = '<b>Akun Manager</b>\n\n'
+    t = '<b>Account Manager</b>\n\n'
     markup = InlineKeyboardMarkup()
 
     accounts = AccountsDB().all()
 
     if len(accounts) == 0:
-        t += 'Tidak ada akun'
+        t += 'Add A new Account'
         markup.row(
             InlineKeyboardButton(
-                text='Tambahkan akun',
+                text='Add A new Account',
                 callback_data='add_account'
             )
         )
@@ -36,7 +36,7 @@ def manage_accounts(d: Union[Message, CallbackQuery]):
 
     markup.row(
         InlineKeyboardButton(
-            text='Tes batch',
+            text='Batch Test',
             callback_data='batch_test_accounts'
         )
     )
