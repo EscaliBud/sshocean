@@ -20,14 +20,14 @@ def manage_droplets(d: Union[Message, CallbackQuery]):
     if len(accounts) == 0:
         markup.row(
             InlineKeyboardButton(
-                text='Tambah Akun',
+                text='Add Account',
                 callback_data='add_account'
             )
         )
 
         bot.send_message(
             text=f'{t}'
-                 f'Akun tidak tersedia',
+                 f'Account Not Available',
             chat_id=d.from_user.id,
             reply_markup=markup,
             parse_mode='HTML'
@@ -44,7 +44,7 @@ def manage_droplets(d: Union[Message, CallbackQuery]):
 
     bot.send_message(
         text=f'{t}'
-             f'Pilih nomor akun',
+             f'Select Account Number',
         chat_id=d.from_user.id,
         parse_mode='HTML',
         reply_markup=markup
