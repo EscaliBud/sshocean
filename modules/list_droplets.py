@@ -20,7 +20,7 @@ def list_droplets(call: CallbackQuery, data: dict):
     bot.edit_message_text(
         text=f'{t}'
              f'akun: <code>{account["email"]}</code>\n\n'
-             'Detail Vps...',
+             'VPS Details...',
         chat_id=call.from_user.id,
         message_id=call.message.message_id,
         parse_mode='HTML'
@@ -33,15 +33,15 @@ def list_droplets(call: CallbackQuery, data: dict):
     if len(droplets) == 0:
         markup.add(
             InlineKeyboardButton(
-                text='Buat instance',
+                text='Create a new instance',
                 callback_data=f'create_droplet?nf=select_region&doc_id={account.doc_id}'
             )
         )
 
         bot.edit_message_text(
             text=f'{t}'
-                 f'akun: <code>{account["email"]}</code>\n\n'
-                 'Tidak ada contoh',
+                 f'Account : <code>{account["email"]}</code>\n\n'
+                 'There are no examples',
             chat_id=call.from_user.id,
             message_id=call.message.message_id,
             parse_mode='HTML',
@@ -59,8 +59,8 @@ def list_droplets(call: CallbackQuery, data: dict):
 
     bot.edit_message_text(
         text=f'{t}'
-             f'akun: <code>{account["email"]}</code>\n\n'
-             'Pilih contoh',
+             f'Account: <code>{account["email"]}</code>\n\n'
+             'Choose an example',
         chat_id=call.from_user.id,
         message_id=call.message.message_id,
         parse_mode='HTML',
