@@ -13,26 +13,26 @@ from utils.db import AccountsDB
 
 def account_detail(call: CallbackQuery, data: dict):
     doc_id = data['doc_id'][0]
-    t = '<b>Informasi Akun</b>\n\n'
+    t = '<b>Account Information</b>\n\n'
 
     account = AccountsDB().get(doc_id=doc_id)
 
     msg = bot.send_message(
         text=f'{t}'
-             f'Surat: <code>{account["email"]}</code>\n\n'
-             f'Mendapatkan informasi...',
+             f'Email: <code>{account["email"]}</code>\n\n'
+             f'Get Information...',
         chat_id=call.from_user.id,
         parse_mode='HTML'
     )
 
-    t += f'Surat: <code>{account["email"]}</code>\n' \
-         f'Komentar: <code>{account["remarks"]}</code>\n' \
-         f'Tanggal Ditambahkan: <code>{account["date"]}</code>\n' \
+    t += f'Email: <code>{account["email"]}</code>\n' \
+         f'Comment: <code>{account["remarks"]}</code>\n' \
+         f'Date Added: <code>{account["date"]}</code>\n' \
          f'Token： <code>{account["token"]}</code>\n\n'
     markup = InlineKeyboardMarkup()
     markup.row(
         InlineKeyboardButton(
-            text='menghapus',
+            text='Delete',
             callback_data=f'delete_account?doc_id={account.doc_id}'
         )
     )
@@ -40,12 +40,12 @@ def account_detail(call: CallbackQuery, data: dict):
     try:
         account_balance = digitalocean.Balance().get_object(api_token=account['token'])
 
-        t += f'Saldo rekening: <code>{account_balance.account_balance}</code>\n' \
-             f'RUU telah digunakan: <code>{account_balance.month_to_date_usage}</code>\n' \
-             f'Tanggal penagihan: <code>{account_balance.generated_at.split("T")[0]}</code>'
+        t += f'Account Balance : <code>{account_balance.account_balance}</code>\n' \
+             f'Account Usage : <code>{account_balance.month_to_date_usage}</code>\n' \
+             f'Billing Date: <code>{account_balance.generated_at.split("T")[0]}</code>'
 
     except DataReadError as e:
-        t += f'Dapatkan kesalahan tagihan: <code>{e}</code>'
+        t += f'Got Billing Errors : <code>{e}</code>'
 
     bot.edit_message_text(
         text=t,
