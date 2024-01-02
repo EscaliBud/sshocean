@@ -64,16 +64,16 @@ def add_account_next_step_handler(m: Message):
         except DataReadError:
             failed_accounts.append(account)
 
-    t = f'<b>Umum {len(accounts)} Nomor akun</b>\n\n'
+    t = f'<b>General {len(accounts)} Account Number</b>\n\n'
 
     if added_accounts:
-        t += f'Ditambahkan dengan sukses {len(added_accounts)} Intivual：\n'
+        t += f'Added successfully {len(added_accounts)} ：\n'
         for added_account in added_accounts:
             t += f'<code>{added_account}</code>\n'
         t += '\n'
 
     if failed_accounts:
-        t += f'Tambahkan gagal {len(failed_accounts)} Intivual：\n'
+        t += f'Failed to create account {len(failed_accounts)} Intivual：\n'
         for failed_account in failed_accounts:
             t += f'<code>{failed_account}</code>\n'
 
