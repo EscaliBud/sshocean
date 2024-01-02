@@ -8,41 +8,41 @@ from telebot.types import (
 
 from _bot import bot
 
-bot_name = environ.get('bot_name', 'Asisten DigitalOcean')
+bot_name = environ.get('bot_name', 'ᴅɪɢɪᴛᴀʟ ᴏᴄᴇᴀɴ ᴀssɪsᴛᴀɴᴛ')
 
 
 def start(d: Message):
     markup = InlineKeyboardMarkup(row_width=2)
     markup.add(
         InlineKeyboardButton(
-            text='Add account',
+            text='ᴀᴅᴅ ᴀᴄᴄᴏᴜɴᴛ',
             callback_data='add_account'
         ),
         InlineKeyboardButton(
-            text='Manage accounts',
+            text='ᴍᴀɴᴀɢᴇ ᴀᴄᴄᴏᴜɴᴛ',
             callback_data='manage_accounts'
         ),
         InlineKeyboardButton(
-            text='Create droplets',
+            text='ᴄʀᴇᴀᴛᴇ ᴅʀᴏᴘʟᴇᴛ',
             callback_data='create_droplet'
         ),
         InlineKeyboardButton(
-            text='Manage droplets',
+            text='ᴍᴀɴᴀɢᴇ ᴅʀᴏᴘʟᴇᴛs',
             callback_data='manage_droplets'
         ),
     )
-    t = f'Selamat Datang <b>{bot_name}</b>\n\n' \
-        'Anda dapat mengelola akun DigitalOcean, membuat instance, dll.\n\n' \
-        'Perintah cepat:\n' \
-        '/start - start bot\n' \
-        '/add_do - add account\n' \
-        '/sett_do - manage accounts\n' \
-        '/bath_do - batch test accounts\n' \
-        '/add_vps - create droplets\n' \
-        '/sett_vps - manage droplets\n' \
+    t = f'Welcome to  <b>{bot_name}</b>\n\n' \
+        'You can Use me to manage your DigitalOcean account.Create Droplets,Manage Droplets and many more features concerning your DigitalOcean account..\n\nTo use Me you need to have Permission from my owner'\
+        'Here Goes My Command List :\n' \
+        '➥/start - sᴛᴀʀᴛs ᴛʜᴇ ʙᴏᴛ\n' \
+        '➥/add_do - ᴀᴅᴅ ᴀ ɴᴇᴡ ᴀᴄᴄᴏᴜɴᴛ\n' \
+        '➥/sett_do - ᴍᴀɴᴀɢᴇ ᴀᴄᴄᴏᴜɴᴛ\n' \
+        '➥/bath_do - ʙᴀᴛᴄʜ ᴛᴇsᴛ ʏᴏᴜʀ ᴀᴄᴄᴏᴜɴᴛ\n' \
+        '➥/add_vps - ᴄʀᴇᴀᴛᴇ ᴅʀᴏᴘʟᴇᴛs\n' \
+        '➥/sett_vps - ᴍᴀɴᴀɢᴇ ᴅʀᴏᴘʟᴇᴛs\n' \
         ' \n' \
-        '<b>Dev: @yha_bot</b>\n' \
-        '<b>Support: @fightertunnell</b>'
+        '<b>✔ᴅᴇᴠᴇʟᴏᴘᴇʀ: @EscaliBud</b>\n' \
+        '<b>✔sᴜᴘᴘᴏʀᴛ: @InfinityHackersKE</b>'
     bot.send_message(
         text=t,
         chat_id=d.from_user.id,
